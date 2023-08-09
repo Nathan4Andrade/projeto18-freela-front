@@ -26,7 +26,11 @@ function App() {
 export default App;
 
 const PagesContainer = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   width: calc(100vw - 50px);
-  max-height: 100vh;
-  padding: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 `;

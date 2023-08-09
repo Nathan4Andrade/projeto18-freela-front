@@ -12,7 +12,7 @@ export default function LoginPage() {
   const [token, setToken] = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const URL = import.meta.env.VITE_API_URL;
+  const apiURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const localToken = JSON.parse(localStorage.getItem("token"));
@@ -28,7 +28,7 @@ export default function LoginPage() {
       password,
     };
     axios
-      .post(`${URL}/signin`, loginInfo)
+      .post(`${apiURL}/signin`, loginInfo)
       .then((resp) => {
         console.log(resp);
         setToken(resp.data);
