@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import iconUser from "../assets/cat.png";
 
 export default function SignupPage() {
-  const [picture, setPicture] = useState("");
+  const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -18,23 +18,40 @@ export default function SignupPage() {
 
   function signup(e) {
     e.preventDefault();
+    console.log(image);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("image", image);
+    formData.append("cpf", cpf);
+    formData.append("telephone", telephone);
+    formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword);
+    /* 
     const signupInfo = {
+      image,
       email,
       name,
       cpf,
       telephone,
       password,
       confirmPassword,
-    };
+    }; */
+    console.log(formData);
     axios
-      .post(`${apiURL}/signup`, signupInfo)
+      .post(`${apiURL}/signup`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((resp) => {
         console.log(resp.data);
         navigate("/login");
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data);
+        alert(err);
       });
   }
 
@@ -42,9 +59,9 @@ export default function SignupPage() {
     <PageContainer>
       <h1>Catwalk</h1>
       <form onSubmit={signup}>
-        <ProfilePicture htmlFor="picture">
-          {picture ? (
-            <img src={URL.createObjectURL(picture)} alt="icon" />
+        <ProfilePicture htmlFor="image">
+          {image ? (
+            <img src={URL.createObjectURL(image)} alt="icon" />
           ) : (
             <span>
               <img src={iconUser} alt="icon" />
@@ -54,11 +71,12 @@ export default function SignupPage() {
         </ProfilePicture>
 
         <input
-          name="picture"
-          id="picture"
+          name="image"
+          id="image"
+          accept="image/*"
           type="file"
           placeholder="Profile picture"
-          onChange={(e) => setPicture(e.target.files[0])}
+          onChange={(e) => setImage(e.target.files[0])}
         />
         <input
           placeholder="Name"
