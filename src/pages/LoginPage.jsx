@@ -17,7 +17,7 @@ export default function LoginPage() {
   useEffect(() => {
     const localToken = JSON.parse(localStorage.getItem("token"));
     if (localToken) {
-      navigate("/");
+      navigate("/home");
     }
   }, [navigate]);
 
@@ -30,10 +30,9 @@ export default function LoginPage() {
     axios
       .post(`${apiURL}/signin`, loginInfo)
       .then((resp) => {
-        console.log(resp);
-        setToken(resp.data);
-        localStorage.setItem("token", JSON.stringify(resp.data));
-        navigate("/");
+        setToken(resp.data.token);
+        localStorage.setItem("token", JSON.stringify(resp.data.token));
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);

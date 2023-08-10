@@ -124,7 +124,7 @@ export default function SignupPage() {
           <span>Signup</span>
         </button>
       </form>
-      <Link to={`/login`}>Already have an account? Login!</Link>
+      <Link to={`/`}>Already have an account? Login!</Link>
     </PageContainer>
   );
 }
