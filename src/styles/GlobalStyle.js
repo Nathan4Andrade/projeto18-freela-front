@@ -59,12 +59,7 @@ const GlobalStyle = createGlobalStyle`
         border-radius: 5px;
     }
     a {
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 18px;
         color: #000;
-        text-decoration: none;
-        padding-top: 30px;
     }
 `;
 

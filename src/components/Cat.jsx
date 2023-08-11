@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export default function Cat(props) {
-  const { name, image, breed, age, description } = props;
+  const { name, image, breed, age } = props;
 
   return (
     <SCCat>
@@ -25,7 +25,7 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 16px;
-  padding-bottom: 48px;
+
   > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
@@ -48,6 +48,8 @@ const Info = styled.div`
 `;
 
 const SCCat = styled.div`
+  padding-top: 16px;
+  padding-bottom: 48px;
   display: flex;
   flex-direction: column;
   img {
