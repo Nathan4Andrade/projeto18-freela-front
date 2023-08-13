@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import CatPage from "./pages/CatPage";
 import MyCatsPage from "./pages/MyCatsPage";
+import AddCatPage from "./pages/AddCatPage";
 
 function App() {
   const [token, setToken] = useState("");
@@ -22,6 +23,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/cats/:idCat" element={<CatPage />} />
             <Route path="/cats/me" element={<MyCatsPage />} />
+            <Route path="/add" element={<AddCatPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
