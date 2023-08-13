@@ -118,6 +118,7 @@ export default function AddCatPage() {
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 262px;
   h1 {
     font-size: 25px;
   }

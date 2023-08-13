@@ -73,6 +73,7 @@ const LoginContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   form {
     max-width: 327px;
   }

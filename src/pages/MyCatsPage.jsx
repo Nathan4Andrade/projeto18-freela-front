@@ -6,6 +6,7 @@ import axios from "axios";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 
 import Footer from "../components/Footer";
+import formatAge from "../components/formatAge";
 
 export default function MyCatsPage() {
   const [cats, setCats] = useState([]);
@@ -92,6 +93,7 @@ export default function MyCatsPage() {
   }
   return (
     <PageContainer>
+      <h1>Seus gatos</h1>
       {cats.map((cat) => (
         <SCCat key={cat.id}>
           <Link to={`/cats/${cat.id}`}>
@@ -100,7 +102,7 @@ export default function MyCatsPage() {
           <Info>
             <div>
               <h2>{cat.name}</h2>
-              <p>{cat.age} meses</p>
+              <p>{formatAge(cat.age)}</p>
             </div>
             <div>
               <button
@@ -150,7 +152,6 @@ const TrashButton = styled.div`
   display: flex;
   align-items: center;
   padding: 0 5px;
-  color: #821c0d;
 
   font-size: 30px;
 `;

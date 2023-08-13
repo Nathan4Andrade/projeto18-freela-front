@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
+import formatAge from "./formatAge";
 
 export default function Cat(props) {
   const { name, image, breed, age } = props;
@@ -13,7 +14,7 @@ export default function Cat(props) {
           <p>{breed} </p>
         </div>
         <div>
-          <p>{age} meses</p>
+          <p>{formatAge(age)}</p>
           <p>Detalhes →</p>
         </div>
       </Info>

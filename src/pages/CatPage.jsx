@@ -7,6 +7,7 @@ import AuthContext from "../contexts/AuthContext";
 import { AiFillHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { MdHeartBroken } from "react-icons/md";
+import formatAge from "../components/formatAge";
 
 export default function CatPage() {
   const [cat, setCat] = useState([]);
@@ -103,18 +104,27 @@ export default function CatPage() {
   return (
     <PageContainer>
       <SCCat>
-        <img src={cat.image} alt={cat.name} />
+        <CatImage src={cat.image} alt={cat.name} />
         <Info>
           <div>
             <h2>{cat.name}</h2>
             <p>{cat.breed} </p>
           </div>
           <div>
-            <p>{cat.age} meses</p>
+            <p>{formatAge(cat.age)}</p>
             <p>{cat.description}</p>
-            <p>Tutor: {cat.owner} </p>
-            <p>Contato: {cat.ownerTelephone} </p>
           </div>
+          <OwnerInfo>
+            <ProfilePicture src={cat.ownerImage} alt={cat.owner} />
+            <div>
+              <p>
+                Tutor: <span>{cat.owner} </span>
+              </p>
+              <p>
+                Contato: <span>{cat.ownerTelephone}</span>{" "}
+              </p>
+            </div>
+          </OwnerInfo>
         </Info>
       </SCCat>
       <SCAddToFavorite>
@@ -186,6 +196,7 @@ const SCAddToFavorite = styled.div`
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 262px;
 `;
 const Info = styled.div`
   display: flex;
@@ -218,9 +229,28 @@ const SCCat = styled.div`
   padding-bottom: 48px;
   display: flex;
   flex-direction: column;
-  img {
-    width: 262px;
-    height: 327px;
-    object-fit: cover;
+`;
+
+const CatImage = styled.img`
+  width: 262px;
+  height: 327px;
+  object-fit: cover;
+`;
+
+const OwnerInfo = styled.div`
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  span {
+    font-weight: 500;
   }
+`;
+
+const ProfilePicture = styled.img`
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  padding-bottom: 10px;
 `;

@@ -64,13 +64,36 @@ export default function HomePage() {
       ) : (
         <h1>Sem gatos disponíveis no momento :/</h1>
       )}
+      <Line />
+      <SiteInfo>
+        <h1>Catwalk</h1>
+        <p>
+          Empresa especializada no agenciamento de gatos para campanhas
+          audiovisuais e impressas.
+        </p>
+      </SiteInfo>
 
       <Footer />
     </PageContainer>
   );
 }
+const SiteInfo = styled.div`
+  padding-bottom: 70px;
+  p {
+    font-size: 14px;
+  }
+`;
+const Line = styled.div`
+  margin: 30px 0;
+  border-top: 0.1px solid #000;
+  align-self: stretch;
+`;
 
 const PageContainer = styled.section`
   display: flex;
+  max-width: 262px;
   flex-direction: column;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 `;
