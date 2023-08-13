@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     button {
         outline: none;
         border: none;
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 600;
         color: #fff;
         cursor: pointer;

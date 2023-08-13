@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AuthContext from "../contexts/AuthContext";
 import axios from "axios";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 
 import Footer from "../components/Footer";
 
@@ -70,6 +71,25 @@ export default function MyCatsPage() {
         console.log(err.response.data);
       });
   }
+  function deleteCat(catId) {
+    if (window.confirm("Tem certeza que quer deletar este item?")) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log(config);
+      axios
+        .delete(`${apiURL}/cats/${catId}`, config)
+        .then((resp) => {
+          console.log(resp.data);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
+  }
   return (
     <PageContainer>
       {cats.map((cat) => (
@@ -86,13 +106,16 @@ export default function MyCatsPage() {
               <button
                 onClick={() => updateCatAvailability(cat.id, !cat.available)}>
                 {cat.available ? (
-                  <span>Disponível</span>
+                  <Available>Disponível</Available>
                 ) : (
-                  <span>Indisponível</span>
+                  <NotAvailable>Indisponível</NotAvailable>
                 )}
               </button>
             </div>
           </Info>
+          <TrashButton onClick={() => deleteCat(cat.id)}>
+            <RiDeleteBack2Fill />
+          </TrashButton>
         </SCCat>
       ))}
       <Footer />
@@ -105,9 +128,15 @@ const PageContainer = styled.section`
   flex-direction: column;
 `;
 
+const Available = styled.span`
+  color: #2b820d;
+`;
+const NotAvailable = styled.span`
+  color: #821c0d;
+`;
+
 const SCCat = styled.div`
   display: flex;
-  width: 70vw;
   flex-direction: row;
   padding-bottom: 24px;
   gap: 24px;
@@ -116,6 +145,14 @@ const SCCat = styled.div`
     height: 100px;
     object-fit: cover;
   }
+`;
+const TrashButton = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  color: #821c0d;
+
+  font-size: 30px;
 `;
 const Info = styled.div`
   display: flex;

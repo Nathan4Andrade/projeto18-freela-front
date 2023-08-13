@@ -38,8 +38,9 @@ export default function FavoritesPage() {
       axios
         .get(`${apiURL}/favorites`, config)
         .then((resp) => {
-          console.log(resp.data);
-          setCats(resp.data);
+          const availableCats = resp.data.filter((cat) => cat.available);
+          console.log(availableCats);
+          setCats(availableCats);
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -50,19 +51,20 @@ export default function FavoritesPage() {
   return (
     <PageContainer>
       <h1>Favoritos</h1>
-      {cats.map(
-        (cat) =>
-          cat.available && (
-            <Link key={cat.id} to={`/cats/${cat.id}`}>
-              <Cat
-                name={cat.name}
-                age={cat.age}
-                breed={cat.breed}
-                description={cat.description}
-                image={cat.image}
-              />
-            </Link>
-          )
+      {cats.length > 0 ? (
+        cats.map((cat) => (
+          <Link key={cat.id} to={`/cats/${cat.catId}`}>
+            <Cat
+              name={cat.name}
+              age={cat.age}
+              breed={cat.breed}
+              description={cat.description}
+              image={cat.image}
+            />
+          </Link>
+        ))
+      ) : (
+        <p>Você não possui favoritos adicionados</p>
       )}
       <Footer />
     </PageContainer>

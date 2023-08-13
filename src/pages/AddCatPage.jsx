@@ -60,7 +60,10 @@ export default function AddCatPage() {
 
     axios
       .post(`${apiURL}/cats/new`, newCat, config)
-      .then((resp) => console.log(resp.data))
+      .then((resp) => {
+        console.log(resp.data);
+        navigate("/");
+      })
       .catch((err) => console.log(err.response.data));
   }
 

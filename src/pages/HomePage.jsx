@@ -49,17 +49,22 @@ export default function HomePage() {
 
   return (
     <PageContainer>
-      {cats.map((cat) => (
-        <Link key={cat.id} to={`/cats/${cat.id}`}>
-          <Cat
-            name={cat.name}
-            age={cat.age}
-            breed={cat.breed}
-            description={cat.description}
-            image={cat.image}
-          />
-        </Link>
-      ))}
+      {cats.length > 0 ? (
+        cats.map((cat) => (
+          <Link key={cat.id} to={`/cats/${cat.id}`}>
+            <Cat
+              name={cat.name}
+              age={cat.age}
+              breed={cat.breed}
+              description={cat.description}
+              image={cat.image}
+            />
+          </Link>
+        ))
+      ) : (
+        <h1>Sem gatos disponíveis no momento :/</h1>
+      )}
+
       <Footer />
     </PageContainer>
   );

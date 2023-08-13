@@ -49,7 +49,7 @@ const Info = styled.div`
 
 const SCCat = styled.div`
   padding-top: 16px;
-  padding-bottom: 48px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   img {

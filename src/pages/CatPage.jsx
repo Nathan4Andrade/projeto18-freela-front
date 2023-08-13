@@ -6,6 +6,7 @@ import AuthContext from "../contexts/AuthContext";
 
 import { AiFillHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
+import { MdHeartBroken } from "react-icons/md";
 
 export default function CatPage() {
   const [cat, setCat] = useState([]);
@@ -75,6 +76,24 @@ export default function CatPage() {
       .post(`${apiURL}/favorites/${idCat}`, null, config)
       .then((resp) => {
         console.log(resp.data);
+        navigate("/favorites");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
+  function removeFromFavorites() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log(config);
+    axios
+      .delete(`${apiURL}/favorites/${idCat}`, config)
+      .then((resp) => {
+        console.log(resp.data);
+        navigate("/favorites");
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -105,8 +124,9 @@ export default function CatPage() {
         </Back>
 
         {favorites.some((f) => cat.id === f.catId) ? (
-          <Button onClick={addToFavorite}>
+          <Button onClick={removeFromFavorites}>
             <span>Remover dos favoritos</span>
+            <MdHeartBroken />
           </Button>
         ) : (
           <Button onClick={addToFavorite}>
@@ -132,6 +152,7 @@ const Back = styled.button`
 const Button = styled.button`
   display: flex;
   height: 48px;
+  max-width: 300px;
   padding: 12px 24px;
   justify-content: space-between;
   align-items: center;
