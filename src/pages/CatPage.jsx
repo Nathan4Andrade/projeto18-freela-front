@@ -4,6 +4,9 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
 
+import { AiFillHeart } from "react-icons/ai";
+import { BiArrowBack } from "react-icons/bi";
+
 export default function CatPage() {
   const [cat, setCat] = useState([]);
   const [token, setToken] = useContext(AuthContext);
@@ -64,10 +67,64 @@ export default function CatPage() {
           </div>
         </Info>
       </SCCat>
+      <SCAddToFavorite>
+        <Line />
+        <Back>
+          <BiArrowBack />
+        </Back>
+
+        <Button>
+          <span>Favoritar</span>
+          <AiFillHeart />
+        </Button>
+      </SCAddToFavorite>
     </PageContainer>
   );
 }
 
+const Back = styled.button`
+  width: 48px;
+  height: 48px;
+  padding: 0px;
+  font-size: 25px;
+  color: #000;
+  background-color: #fff;
+  margin-bottom: -4px;
+`;
+
+const Button = styled.button`
+  display: flex;
+  height: 48px;
+  padding: 12px 24px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 70%;
+
+  background-color: #000;
+`;
+const Line = styled.div`
+  position: absolute;
+  top: 0;
+  border-top: 0.1px solid #000;
+
+  width: 80%;
+  align-self: stretch;
+`;
+
+const SCAddToFavorite = styled.div`
+  width: 100vw;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #ffffff;
+  flex-direction: row;
+`;
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;

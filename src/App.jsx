@@ -7,6 +7,7 @@ import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import CatPage from "./pages/CatPage";
+import MyCatsPage from "./pages/MyCatsPage";
 
 function App() {
   const [token, setToken] = useState("");
@@ -20,6 +21,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/cats/:idCat" element={<CatPage />} />
+            <Route path="/cats/me" element={<MyCatsPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
@@ -35,6 +37,6 @@ const PagesContainer = styled.main`
   align-items: center;
   margin: 0 auto;
   width: calc(100vw - 50px);
-  padding-top: 70px;
-  padding-bottom: 25px;
+  padding-top: 80px;
+  padding-bottom: 70px;
 `;

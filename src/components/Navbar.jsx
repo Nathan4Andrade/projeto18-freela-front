@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MdAddCircle } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Navbar() {
   return (
     <NavContainer>
-      <Link to={`/home`}>
-        <Logo>Catwalk</Logo>
-      </Link>
+      <div>
+        <GiHamburgerMenu />
+        <Link to={`/home`}>
+          <Logo>Catwalk</Logo>
+        </Link>
+        <Link to="/add">
+          <MdAddCircle />
+        </Link>
+      </div>
     </NavContainer>
   );
 }
@@ -18,7 +26,13 @@ const NavContainer = styled.header`
   height: 70px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  div {
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   background: #fff0b5;
 
@@ -28,6 +42,7 @@ const NavContainer = styled.header`
   z-index: 1;
 
   a {
+    font-size: 30px;
     text-decoration: none;
   }
 `;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import AuthContext from "../contexts/AuthContext";
 import axios from "axios";
 import Cat from "../components/Cat";
+import Footer from "../components/Footer";
 
 export default function HomePage() {
   const [cats, setCats] = useState([]);
@@ -59,6 +60,7 @@ export default function HomePage() {
           />
         </Link>
       ))}
+      <Footer />
     </PageContainer>
   );
 }
@@ -67,5 +69,3 @@ const PageContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;
-
-
