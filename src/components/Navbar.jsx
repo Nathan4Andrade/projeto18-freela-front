@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <NavContainer>
       <div>
-        <GiHamburgerMenu />
+        {/* <GiHamburgerMenu /> */}
         <Link to={`/home`}>
           <Logo>Catwalk</Logo>
         </Link>

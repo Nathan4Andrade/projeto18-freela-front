@@ -9,6 +9,7 @@ import { BiArrowBack } from "react-icons/bi";
 
 export default function CatPage() {
   const [cat, setCat] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [token, setToken] = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -47,8 +48,38 @@ export default function CatPage() {
         .catch((err) => {
           console.log(err.response.data);
         });
+      axios
+        .get(`${apiURL}/favorites`, config)
+        .then((resp) => {
+          console.log(resp.data);
+          setFavorites(resp.data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     }
   }, [apiURL, idCat, navigate, setToken, token]);
+
+  function back() {
+    navigate("/");
+  }
+
+  function addToFavorite() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log(config);
+    axios
+      .post(`${apiURL}/favorites/${idCat}`, null, config)
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
 
   return (
     <PageContainer>
@@ -69,14 +100,20 @@ export default function CatPage() {
       </SCCat>
       <SCAddToFavorite>
         <Line />
-        <Back>
+        <Back onClick={back}>
           <BiArrowBack />
         </Back>
 
-        <Button>
-          <span>Favoritar</span>
-          <AiFillHeart />
-        </Button>
+        {favorites.some((f) => cat.id === f.catId) ? (
+          <Button onClick={addToFavorite}>
+            <span>Remover dos favoritos</span>
+          </Button>
+        ) : (
+          <Button onClick={addToFavorite}>
+            <span>Favoritar</span>
+            <AiFillHeart />
+          </Button>
+        )}
       </SCAddToFavorite>
     </PageContainer>
   );

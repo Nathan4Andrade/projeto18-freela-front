@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import CatPage from "./pages/CatPage";
 import MyCatsPage from "./pages/MyCatsPage";
 import AddCatPage from "./pages/AddCatPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   const [token, setToken] = useState("");
@@ -24,6 +25,7 @@ function App() {
             <Route path="/cats/:idCat" element={<CatPage />} />
             <Route path="/cats/me" element={<MyCatsPage />} />
             <Route path="/add" element={<AddCatPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
