@@ -18,33 +18,20 @@ export default function SignupPage() {
 
   function signup(e) {
     e.preventDefault();
-    console.log(image);
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("image", image);
-    formData.append("cpf", cpf);
-    formData.append("telephone", telephone);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    /* 
-    const signupInfo = {
-      image,
-      email,
+    const signupData = {
       name,
+      email,
+      image,
       cpf,
       telephone,
       password,
       confirmPassword,
-    }; */
-    console.log(formData);
+    };
+
+    console.log(signupData);
     axios
-      .post(`${apiURL}/signup`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(`${apiURL}/signup`, signupData)
       .then((resp) => {
         console.log(resp.data);
         navigate("/");
@@ -87,6 +74,7 @@ export default function SignupPage() {
         <input
           placeholder="CPF"
           type="text"
+          autoComplete="none"
           value={cpf}
           onChange={(e) => setCpf(e.target.value)}
           required
@@ -101,6 +89,7 @@ export default function SignupPage() {
         <input
           placeholder="Password"
           type="password"
+          autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -109,6 +98,7 @@ export default function SignupPage() {
           placeholder="Confirm Password"
           type="password"
           value={confirmPassword}
+          autoComplete="new-password"
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />

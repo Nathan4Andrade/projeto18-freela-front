@@ -13,8 +13,9 @@ function Navbar() {
 
   useEffect(() => {
     let config;
+    let localUserToken;
     if (!token) {
-      const localUserToken = JSON.parse(localStorage.getItem("token"));
+      localUserToken = JSON.parse(localStorage.getItem("token"));
 
       if (localUserToken) {
         setToken(localUserToken);
@@ -34,15 +35,17 @@ function Navbar() {
     }
     console.log(config);
 
-    axios
-      .get(`${apiURL}/user`, config)
-      .then((resp) => {
-        console.log(resp.data);
-        setUser(resp.data);
-      })
-      .catch((err) => {
-        err.response.data;
-      });
+    if (localUserToken || token) {
+      axios
+        .get(`${apiURL}/user`, config)
+        .then((resp) => {
+          console.log(resp.data);
+          setUser(resp.data);
+        })
+        .catch((err) => {
+          err.response.data;
+        });
+    }
   }, [apiURL, setToken, token]);
 
   return (

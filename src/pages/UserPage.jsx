@@ -46,7 +46,7 @@ export default function UserPage() {
       .catch((err) => {
         err.response.data;
       });
-  }, [setToken, token, setUser, apiURL]);
+  }, [setToken, token, setUser, apiURL, navigate]);
 
   function formatPhoneNumber(phoneNumber) {
     if (phoneNumber) {
