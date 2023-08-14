@@ -42,7 +42,7 @@ export default function FavoritesPage() {
           setCats(availableCats);
         })
         .catch((err) => {
-          alert(err.response.data.message);
+          console.log(err.response.data.message);
         });
     }
   }, [apiURL, navigate, setToken, token]);

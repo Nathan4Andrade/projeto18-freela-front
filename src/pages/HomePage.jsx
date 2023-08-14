@@ -42,7 +42,7 @@ export default function HomePage() {
           setCats(resp.data);
         })
         .catch((err) => {
-          alert(err.response.data.message);
+          console.log(err.response.data);
         });
     }
   }, [apiURL, navigate, setToken, token]);

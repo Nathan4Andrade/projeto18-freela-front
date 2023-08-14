@@ -39,7 +39,7 @@ export default function LoginPage() {
         if (err.response.status === 401) {
           setErrorMessage("Senha ou e-mail incorretos");
         } else {
-          alert(err.response.data);
+          console.log(err.response.data);
         }
       });
   }

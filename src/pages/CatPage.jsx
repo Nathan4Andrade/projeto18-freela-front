@@ -61,7 +61,7 @@ export default function CatPage() {
           setFavorites(resp.data);
         })
         .catch((err) => {
-          alert(err.response.data.message);
+          console.log(err.response.data.message);
         });
     }
   }, [apiURL, idCat, navigate, setToken, token]);

@@ -43,7 +43,7 @@ export default function MyCatsPage() {
           setCats(resp.data);
         })
         .catch((err) => {
-          alert(err.response.data.message);
+          console.log(err.response.data.message);
         });
     }
   }, [apiURL, navigate, setToken, token]);

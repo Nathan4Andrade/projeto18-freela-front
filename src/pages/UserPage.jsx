@@ -43,7 +43,7 @@ export default function UserPage() {
         setUser(resp.data);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        console.log(err.response.data);
       });
   }, [setToken, token, setUser, apiURL, navigate]);
 
