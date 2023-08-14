@@ -78,6 +78,7 @@ const LoginContainer = styled.section`
     max-width: 327px;
   }
   button {
+    margin-bottom: 10px;
     div {
       justify-content: center;
     }

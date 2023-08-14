@@ -46,18 +46,26 @@ function Navbar() {
   }, [apiURL, setToken, token]);
 
   return (
-    <NavContainer>
-      <div>
-        <ProfilePicture src={user.image} alt={user.name} />
+    <>
+      {!user.name ? (
+        <></>
+      ) : (
+        <NavContainer>
+          <div>
+            <Link to={`/me`}>
+              <ProfilePicture src={user.image} alt={user.name} />
+            </Link>
 
-        <Link to={`/home`}>
-          <Logo>Catwalk</Logo>
-        </Link>
-        <Link to="/add">
-          <MdAddCircle />
-        </Link>
-      </div>
-    </NavContainer>
+            <Link to={`/home`}>
+              <Logo>Catwalk</Logo>
+            </Link>
+            <Link to="/add">
+              <MdAddCircle />
+            </Link>
+          </div>
+        </NavContainer>
+      )}
+    </>
   );
 }
 

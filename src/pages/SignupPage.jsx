@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import iconUser from "../assets/cat.png";
 
 export default function SignupPage() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(iconUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -47,7 +47,7 @@ export default function SignupPage() {
       })
       .then((resp) => {
         console.log(resp.data);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -60,23 +60,15 @@ export default function SignupPage() {
       <h1>Catwalk</h1>
       <form onSubmit={signup}>
         <ProfilePicture htmlFor="image">
-          {image ? (
-            <img src={URL.createObjectURL(image)} alt="icon" />
-          ) : (
-            <span>
-              <img src={iconUser} alt="icon" />
-              <p>Set Profile Picture</p>
-            </span>
-          )}
+          <img src={image} alt="icon" />
         </ProfilePicture>
 
         <input
           name="image"
           id="image"
-          accept="image/*"
-          type="file"
+          type="text"
           placeholder="Profile picture"
-          onChange={(e) => setImage(e.target.files[0])}
+          onChange={(e) => setImage(e.target.value)}
         />
         <input
           placeholder="Name"
@@ -167,6 +159,7 @@ const PageContainer = styled.section`
     }
   }
   button {
+    margin-bottom: 10px;
     :disabled {
       background-color: grey;
     }

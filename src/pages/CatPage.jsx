@@ -62,6 +62,31 @@ export default function CatPage() {
     }
   }, [apiURL, idCat, navigate, setToken, token]);
 
+  function formatPhoneNumber(phoneNumber) {
+    if (phoneNumber) {
+      // Remove qualquer caractere não numérico do número de telefone
+
+      // Verifica se o número de telefone possui o tamanho correto
+      if (phoneNumber.length !== 10) {
+        return phoneNumber; // Retorna o número não formatado se o tamanho for incorreto
+      }
+
+      // Formata o número de telefone no formato desejado: (99) 99999-9999
+      const formattedPhoneNumber =
+        phoneNumber.length === 10
+          ? `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(
+              2,
+              6
+            )}-${phoneNumber.slice(6)}`
+          : `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(
+              2,
+              7
+            )}-${phoneNumber.slice(7)}`;
+
+      return formattedPhoneNumber;
+    }
+  }
+
   function back() {
     navigate("/");
   }
@@ -118,10 +143,10 @@ export default function CatPage() {
             <ProfilePicture src={cat.ownerImage} alt={cat.owner} />
             <div>
               <p>
-                Tutor: <span>{cat.owner} </span>
+                Tutor(a): <span>{cat.owner} </span>
               </p>
               <p>
-                Contato: <span>{cat.ownerTelephone}</span>{" "}
+                Contato: <span>{formatPhoneNumber(cat.ownerTelephone)}</span>{" "}
               </p>
             </div>
           </OwnerInfo>
@@ -243,6 +268,7 @@ const OwnerInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+  gap: 5px;
   span {
     font-weight: 500;
   }

@@ -10,6 +10,7 @@ import CatPage from "./pages/CatPage";
 import MyCatsPage from "./pages/MyCatsPage";
 import AddCatPage from "./pages/AddCatPage";
 import FavoritesPage from "./pages/FavoritesPage";
+import UserPage from "./pages/UserPage";
 
 function App() {
   const [token, setToken] = useState("");
@@ -26,6 +27,7 @@ function App() {
             <Route path="/cats/me" element={<MyCatsPage />} />
             <Route path="/add" element={<AddCatPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/me" element={<UserPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
