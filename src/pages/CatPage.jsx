@@ -142,11 +142,13 @@ export default function CatPage() {
           <OwnerInfo>
             <ProfilePicture src={cat.ownerImage} alt={cat.owner} />
             <div>
+              <p>Tutor(a):</p>
               <p>
-                Tutor(a): <span>{cat.owner} </span>
+                <span>{cat.owner} </span>
               </p>
+              <p>Contato: </p>
               <p>
-                Contato: <span>{formatPhoneNumber(cat.ownerTelephone)}</span>{" "}
+                <span>{formatPhoneNumber(cat.ownerTelephone)}</span>
               </p>
             </div>
           </OwnerInfo>
@@ -265,16 +267,17 @@ const CatImage = styled.img`
 const OwnerInfo = styled.div`
   padding-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   font-size: 14px;
-  gap: 5px;
+  gap: 15px;
   span {
     font-weight: 500;
   }
 `;
 
 const ProfilePicture = styled.img`
+  object-fit: cover;
   border-radius: 50%;
   width: 100px;
   height: 100px;
