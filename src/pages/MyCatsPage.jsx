@@ -36,15 +36,14 @@ export default function MyCatsPage() {
           Authorization: `Bearer ${token}`,
         },
       };
-      console.log(config);
+
       axios
         .get(`${apiURL}/cats/me`, config)
         .then((resp) => {
-          console.log(resp.data);
           setCats(resp.data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          alert(err.response.data.message);
         });
     }
   }, [apiURL, navigate, setToken, token]);

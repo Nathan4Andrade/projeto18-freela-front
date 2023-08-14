@@ -29,16 +29,13 @@ export default function SignupPage() {
       confirmPassword,
     };
 
-    console.log(signupData);
     axios
       .post(`${apiURL}/signup`, signupData)
-      .then((resp) => {
-        console.log(resp.data);
+      .then(() => {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
-        alert(err);
+        alert(err.response.data);
       });
   }
 

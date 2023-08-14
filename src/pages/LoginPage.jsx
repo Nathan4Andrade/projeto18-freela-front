@@ -8,6 +8,7 @@ import AuthContext from "../contexts/AuthContext";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [token, setToken] = useContext(AuthContext);
 
@@ -35,10 +36,12 @@ export default function LoginPage() {
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err);
-        alert(err.response.data);
+        if (err.response.status === 401) {
+          setErrorMessage("Senha ou e-mail incorretos");
+        } else {
+          alert(err.response.data);
+        }
       });
-    return true;
   }
 
   return (
@@ -61,6 +64,7 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {errorMessage && <Error>{errorMessage}</Error>}
         <button>
           <span>Login</span>
         </button>
@@ -90,4 +94,8 @@ const LoginContainer = styled.section`
     text-align: center;
     padding-bottom: 80px;
   }
+`;
+
+const Error = styled.p`
+  color: red;
 `;

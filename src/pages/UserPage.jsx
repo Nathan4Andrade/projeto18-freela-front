@@ -4,6 +4,7 @@ import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import formatPhoneNumber from "../components/formatPhoneNumber";
 
 export default function UserPage() {
   const [user, setUser] = useState([]);
@@ -35,43 +36,16 @@ export default function UserPage() {
         },
       };
     }
-    console.log(config);
 
     axios
       .get(`${apiURL}/user`, config)
       .then((resp) => {
-        console.log(resp.data);
         setUser(resp.data);
       })
       .catch((err) => {
-        err.response.data;
+        alert(err.response.data.message);
       });
   }, [setToken, token, setUser, apiURL, navigate]);
-
-  function formatPhoneNumber(phoneNumber) {
-    if (phoneNumber) {
-      // Remove qualquer caractere não numérico do número de telefone
-
-      // Verifica se o número de telefone possui o tamanho correto
-      if (phoneNumber.length !== 10) {
-        return phoneNumber; // Retorna o número não formatado se o tamanho for incorreto
-      }
-
-      // Formata o número de telefone no formato desejado: (99) 99999-9999
-      const formattedPhoneNumber =
-        phoneNumber.length === 10
-          ? `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(
-              2,
-              6
-            )}-${phoneNumber.slice(6)}`
-          : `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(
-              2,
-              7
-            )}-${phoneNumber.slice(7)}`;
-
-      return formattedPhoneNumber;
-    }
-  }
 
   function logout() {
     localStorage.clear();

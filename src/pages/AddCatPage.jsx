@@ -4,13 +4,14 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
 import Footer from "../components/Footer";
+import iconUser from "../assets/cat.png";
 
 export default function AddCatPage() {
   const [token, setToken] = useContext(AuthContext);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [age, setAge] = useState();
+  const [age, setAge] = useState(0);
   const [breed, setBreed] = useState("");
   const [description, setDescription] = useState("");
 
@@ -32,12 +33,12 @@ export default function AddCatPage() {
         navigate("/");
       }
     } else {
+      // eslint-disable-next-line no-unused-vars
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-      console.log(config);
     }
   }, [apiURL, navigate, setToken, token]);
 
@@ -60,17 +61,29 @@ export default function AddCatPage() {
 
     axios
       .post(`${apiURL}/cats/new`, newCat, config)
-      .then((resp) => {
-        console.log(resp.data);
+      .then(() => {
+        console.log("Adicionando novo gato");
         navigate("/");
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => alert(err.response.data.message));
   }
 
   return (
     <PageContainer>
       <h1>Adicionar novo gato</h1>
       <form onSubmit={addCat}>
+        <ProfilePicture htmlFor="image">
+          <img src={image ? image : iconUser} alt="icon" />
+        </ProfilePicture>
+        <input
+          placeholder="URL da Imagem"
+          id="image"
+          name="image"
+          type="text"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          required
+        />
         <input
           placeholder="Nome"
           type="text"
@@ -78,17 +91,11 @@ export default function AddCatPage() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        <input
-          placeholder="URL da Imagem"
-          type="text"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          required
-        />
+
         <input
           placeholder="Idade (em meses)"
           type="number"
-          value={age}
+          value={age > 0 ? age : ""}
           onChange={(e) => setAge(e.target.value)}
           required
         />
@@ -129,5 +136,27 @@ const PageContainer = styled.div`
     border-radius: 8px;
     background: #fff;
     border: none;
+  }
+`;
+const ProfilePicture = styled.label`
+  width: 262px;
+  height: 327px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #707070;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  span {
+    > p {
+      padding-top: 5px;
+      font-size: 10px;
+    }
   }
 `;

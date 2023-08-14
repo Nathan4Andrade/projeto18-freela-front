@@ -34,16 +34,15 @@ export default function FavoritesPage() {
           Authorization: `Bearer ${token}`,
         },
       };
-      console.log(config);
+
       axios
         .get(`${apiURL}/favorites`, config)
         .then((resp) => {
           const availableCats = resp.data.filter((cat) => cat.available);
-          console.log(availableCats);
           setCats(availableCats);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          alert(err.response.data.message);
         });
     }
   }, [apiURL, navigate, setToken, token]);

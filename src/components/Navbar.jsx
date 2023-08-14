@@ -33,17 +33,15 @@ function Navbar() {
         },
       };
     }
-    console.log(config);
 
     if (localUserToken || token) {
       axios
         .get(`${apiURL}/user`, config)
         .then((resp) => {
-          console.log(resp.data);
           setUser(resp.data);
         })
         .catch((err) => {
-          err.response.data;
+          alert(err.response.data.message);
         });
     }
   }, [apiURL, setToken, token]);
@@ -62,6 +60,7 @@ function Navbar() {
             <Link to={`/home`}>
               <Logo>Catwalk</Logo>
             </Link>
+
             <Link to="/add">
               <MdAddCircle />
             </Link>
