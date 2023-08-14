@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 export default function HomePage() {
   const [cats, setCats] = useState([]);
   const [token, setToken] = useContext(AuthContext);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
@@ -47,9 +48,33 @@ export default function HomePage() {
     }
   }, [apiURL, navigate, setToken, token]);
 
+  const filteredCats = cats.filter(
+    (cat) =>
+      cat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cat.breed.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <PageContainer>
-      {cats.length > 0 ? (
+      <input
+        type="text"
+        placeholder="Digite sua busca..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      {searchQuery ? (
+        filteredCats.map((cat) => (
+          <Link key={cat.id} to={`/cats/${cat.id}`}>
+            <Cat
+              name={cat.name}
+              age={cat.age}
+              breed={cat.breed}
+              description={cat.description}
+              image={cat.image}
+            />
+          </Link>
+        ))
+      ) : cats.length > 0 ? (
         cats.map((cat) => (
           <Link key={cat.id} to={`/cats/${cat.id}`}>
             <Cat
@@ -96,4 +121,9 @@ const PageContainer = styled.section`
   align-content: center;
   align-items: center;
   flex-wrap: wrap;
+  input {
+    border-radius: 8px;
+    background: #fff;
+    border: none;
+  }
 `;
