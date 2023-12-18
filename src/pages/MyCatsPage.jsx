@@ -21,7 +21,6 @@ export default function MyCatsPage() {
 
       if (localUserToken) {
         setToken(localUserToken);
-        // eslint-disable-next-line no-unused-vars
         const config = {
           headers: {
             Authorization: `Bearer ${localUserToken}`,
@@ -78,11 +77,9 @@ export default function MyCatsPage() {
           Authorization: `Bearer ${token}`,
         },
       };
-      console.log(config);
       axios
         .delete(`${apiURL}/cats/${catId}`, config)
         .then((resp) => {
-          console.log(resp.data);
           navigate("/");
         })
         .catch((err) => {
