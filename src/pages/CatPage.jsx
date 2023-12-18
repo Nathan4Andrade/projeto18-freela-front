@@ -28,7 +28,6 @@ export default function CatPage() {
 
       if (localUserToken) {
         setToken(localUserToken);
-        // eslint-disable-next-line no-unused-vars
         const config = {
           headers: {
             Authorization: `Bearer ${localUserToken}`,
@@ -79,7 +78,6 @@ export default function CatPage() {
     axios
       .post(`${apiURL}/favorites/${idCat}`, null, config)
       .then((resp) => {
-        console.log(resp.data);
         navigate("/favorites");
       })
       .catch((err) => {
@@ -95,7 +93,6 @@ export default function CatPage() {
     axios
       .delete(`${apiURL}/favorites/${idCat}`, config)
       .then((resp) => {
-        console.log(resp.data);
         navigate("/favorites");
       })
       .catch((err) => {
