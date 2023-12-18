@@ -1,4 +1,4 @@
-# Get Samurais:
+# CatWalk:
 
 Este projeto é o front-end de um sistema de cadastro e gerenciamento de gatos famosos para uma agência de modelos.
 
