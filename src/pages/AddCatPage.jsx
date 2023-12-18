@@ -23,7 +23,6 @@ export default function AddCatPage() {
 
       if (localUserToken) {
         setToken(localUserToken);
-        // eslint-disable-next-line no-unused-vars
         const config = {
           headers: {
             Authorization: `Bearer ${localUserToken}`,
@@ -33,7 +32,6 @@ export default function AddCatPage() {
         navigate("/");
       }
     } else {
-      // eslint-disable-next-line no-unused-vars
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +60,6 @@ export default function AddCatPage() {
     axios
       .post(`${apiURL}/cats/new`, newCat, config)
       .then(() => {
-        console.log("Adicionando novo gato");
         navigate("/");
       })
       .catch((err) => alert(err.response.data.message));
